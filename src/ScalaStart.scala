@@ -46,7 +46,7 @@ object ScalaStart {
     此函数还没写成如下形式：
     def Predicate(x: Int, y: Int) = if (x > y) x else y
     这里可以看出，函数名后面跟的Int 是返回值类型。
-
+print(x + " ")
    */
   def Predicate(x : Int , y : Int) : Int = {
     if (x > y) x else y
@@ -69,6 +69,9 @@ object ScalaStart {
     for(x <- arr){
       print(x + " ")
     }
+
+
+
   }
 
 }
