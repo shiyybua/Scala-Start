@@ -7,16 +7,13 @@
 //object WordCount2 {
 //  def main(args: Array[String]): Unit = {
 //
-//    val conf = new SparkConf()
-//    conf.setMaster("local")
-//    conf.setAppName("app")
+//    val conf = new SparkConf().setAppName("Simple Application").setMaster("local[*]")
 //    val sc = new SparkContext(conf)
 //    val line = sc.textFile("/Users/mac/software/spark-2.1/NOTICE")
 //
 //    println(line.flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _).collect().foreach(println))
 //
 //    sc.stop()
-//
 //  }
 //
 //}
