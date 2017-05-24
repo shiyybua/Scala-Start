@@ -7,6 +7,7 @@ import org.apache.spark.sql.{SQLContext, SparkSession}
   */
 
 class ReadCSV(){
+
   val sparkSQL = SparkSession.builder().master("local").appName("Read CSV").getOrCreate()
   // Read出来的数据被转换成了DataFrame.
   val df = sparkSQL.read
@@ -17,8 +18,12 @@ class ReadCSV(){
   // 这个只能作用于当前session，要创建全局必须使用createGlobalTempView，查表的时候用global_temp.TABLENAME.
   df.createOrReplaceTempView("finance")
 
+  // 这个是在内部导入的。
+  import sparkSQL.implicits._
+
   //    打印csv里面的内容。Only show the top 20 row;
   def justShow(): Unit ={
+
     df.show()
   }
 
@@ -59,7 +64,6 @@ class ReadCSV(){
       println(x)
     }
   }
-
 }
 
 object ReadCSV{
