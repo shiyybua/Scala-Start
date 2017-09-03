@@ -1,11 +1,11 @@
 /**
   * Created by cai on 5/24/17.
   */
-
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.mllib.regression.LinearRegressionWithSGD
 import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.mllib.linalg.Vectors
+
 
 
 object LR{
@@ -14,12 +14,17 @@ object LR{
     val sc = new SparkContext(conf)
 
     // Load and parse the data
-    val data = sc.textFile("/home/cai/Downloads/data_dic_2/bankChurn.csv")
+    var data = sc.textFile("/Users/mac/Desktop/finance_analysis/2/bankChurn.csv")
+    // 删除第一行。
+//    data = data.mapPartitionsWithIndex { (idx, iter) => if (idx == 0) iter.drop(1) else iter }
+
+    // 删除行的第二个方法。
+    val header = data.first()
+    data = data.filter(row => row != header)
     val parsedData = data.map { line =>
       val parts = line.split(',')
       LabeledPoint(parts(0).toDouble, Vectors.dense(parts(1).split(' ').map(_.toDouble)))
     }
-
     // Building the model
     val numIterations = 100
     val model = LinearRegressionWithSGD.train(parsedData, numIterations)

@@ -14,7 +14,10 @@ class ReadCSV(){
     .format("com.databricks.spark.csv")
     .option("header", "true") //reading the headers
     .option("mode", "DROPMALFORMED")
-    .load("/home/cai/Downloads/data_dic_2/bankChurn.csv");
+    .load("hdfs://localhost:8020/usr/kaggle_data/bankChurn.csv"); // bingo,查看core-site
+//    .load("/Users/mac/Desktop/finance_analysis/2/bankChurn.csv");
+
+
   // 这个只能作用于当前session，要创建全局必须使用createGlobalTempView，查表的时候用global_temp.TABLENAME.
   df.createOrReplaceTempView("finance")
 

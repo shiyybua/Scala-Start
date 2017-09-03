@@ -5,6 +5,20 @@ package practice
   *
   */
 object ForString {
+  def main(args: Array[String]): Unit = {
+    getInput("howareu")
+    // 直接在后面跟了方法，没有加. 这个就是和操作符的方式一样。Scala里很多的方法都可以这么用
+    println("asd" indexOf("a"))
+
+    for (x <- filesEnding(""))
+      println(x)
+
+    // 双重循环。
+    for(x <- Array(10, 20); y <- Array("a","b","c")){
+      println(x, y)
+    }
+  }
+
   //NOTICE：Scala更趋向于函数式编程，没有break、continue方法。
   def getInput(str : String): Unit ={
     println(str)
@@ -26,12 +40,5 @@ object ForString {
     for (file <- filesHere; if file.getName.endsWith(query))
       yield file
 
-  def main(args: Array[String]): Unit = {
-    getInput("howareu")
-    // 直接在后面跟了方法，没有加. 这个就是和操作符的方式一样。Scala里很多的方法都可以这么用
-    println("asd" indexOf("a"))
 
-    for (x <- filesEnding(""))
-      println(x)
-  }
 }
